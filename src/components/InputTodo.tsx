@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { Button } from './button'
-import { Input } from './input'
+import { Button } from './ui/button'
+import { Input } from './ui/input'
 import { useTodosStore } from '@/store'
 
 export default function InputTodo() {
@@ -8,18 +8,25 @@ export default function InputTodo() {
 
   const { addTodo } = useTodosStore()
 
+  const [error, setError] = useState('')
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     console.log('submit')
     e.preventDefault()
     if (value) {
+      if (value.length > 50) {
+        setError('El texto no puede ser mayor a 50 caracteres')
+        return
+      }
       addTodo(value)
       setValue('')
+      setError('')
     }
     return
   }
   return (
     <form
-      className='flex gap-2 rounded-lg bg-slate-600 p-2'
+      className='relative flex gap-2 rounded-lg bg-slate-600 p-2'
       onSubmit={(e) => handleSubmit(e)}
     >
       <Input
@@ -29,6 +36,7 @@ export default function InputTodo() {
         className='bg-white'
       />
       <Button type='submit'>Add Todo</Button>
+      <p className='absolute -top-6 text-red-400'>{error}</p>
     </form>
   )
 }

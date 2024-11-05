@@ -18,7 +18,7 @@ export default function TodoCompleted({
         toggleCompleted(id)
       }}
     >
-      <img src='/check.svg' />
+      <img src='/check.svg' width={20} height={20} />
     </Button>
   )
 }

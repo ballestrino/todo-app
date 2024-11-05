@@ -84,6 +84,11 @@ export const useTodosStore = create<TodosStore>((set, get) => ({
   },
 
   setTodos: (todos: Todo[]) => {
+    try {
+      window.localStorage.setItem('todos', JSON.stringify(todos))
+    } catch (error) {
+      console.log(error)
+    }
     set({ todos })
   },
 }))

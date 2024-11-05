@@ -1,58 +1,83 @@
-import { useTodosStore, type Todo } from '@/store'
-import { Button } from './ui/button'
-import { useRef, useState } from 'react'
-import TodoEdit from './TodoEdit'
-import DeleteButton from './ui/deleteButton'
+import { type Todo as TodoType, useTodosStore } from '@/store'
 import TodoCompleted from './TodoCompleted'
+import { Button } from './ui/button'
+import DeleteButton from './ui/deleteButton'
+import { type SyntheticListenerMap } from '@dnd-kit/core/dist/hooks/utilities'
+import { type DraggableAttributes } from '@dnd-kit/core'
 
-export default function Todo({ todo }: { todo: Todo }) {
-  const { removeTodo, toggleCompleted } = useTodosStore()
-  const [edit, setEdit] = useState<boolean>(false)
+interface TodoProps {
+  todo: TodoType
+  attributes: DraggableAttributes
+  listeners: SyntheticListenerMap | undefined
+  inputRef: React.RefObject<HTMLInputElement>
+  setEdit: (edit: boolean) => void
+}
 
-  const inputRef = useRef<HTMLInputElement>(null)
-
+export default function Todo({
+  todo,
+  attributes,
+  listeners,
+  inputRef,
+  setEdit,
+}: TodoProps) {
+  const { removeTodo } = useTodosStore()
   return (
-    <div
-      className={`flex w-full items-center justify-between gap-2 rounded-lg bg-white px-5 py-2 ${todo.completed && 'opacity-80'} shadow-sm transition-all duration-300 hover:shadow-md`}
-      onClick={() => {
-        toggleCompleted(todo.id)
-      }}
-    >
-      {!edit ? (
-        <>
-          <div className='flex items-center gap-3'>
+    <div className='flex w-full flex-col gap-2 md:h-[80px] md:flex-row'>
+      <div className='flex w-full'>
+        <div className='flex w-full items-center gap-3'>
+          <div className='flex'>
+            <Button
+              className='cursor-move'
+              size={'icon'}
+              variant={'ghost'}
+              {...attributes}
+              {...listeners}
+            >
+              <img src='/grip-vertical.svg' alt='drag item' />
+            </Button>
+
             <TodoCompleted id={todo.id} completed={todo.completed} />
-            <p className={`text-black ${todo.completed && 'line-through'}`}>
-              {todo.text}
-            </p>
           </div>
 
-          <div
-            className='flex gap-2'
+          <p
+            className={`hidden break-words text-black md:block ${todo.completed && 'text line-through'}`}
             onClick={(e) => {
               e.stopPropagation()
             }}
           >
-            <Button
-              size={'icon'}
-              onClick={(e) => {
-                e.stopPropagation()
-                setEdit(true)
-                setTimeout(() => inputRef.current?.focus(), 10)
-              }}
-            >
-              <img src='/pencil.svg' />
-            </Button>
-            <DeleteButton
-              onClick={() => removeTodo(todo.id)}
-              position='bottom'
-              className='rounded-lg bg-slate-100 p-1'
-            />
-          </div>
-        </>
-      ) : (
-        <TodoEdit todo={todo} inputRef={inputRef} setEdit={setEdit} />
-      )}
+            {todo.text}
+          </p>
+        </div>
+
+        <div
+          className='flex items-center gap-2'
+          onClick={(e) => {
+            e.stopPropagation()
+          }}
+        >
+          <Button
+            size={'icon'}
+            onClick={(e) => {
+              e.stopPropagation()
+              setEdit(true)
+              setTimeout(() => inputRef.current?.focus(), 10)
+            }}
+          >
+            <img src='/pencil.svg' />
+          </Button>
+          <DeleteButton
+            onClick={() => removeTodo(todo.id)}
+            position='bottom'
+            className='rounded-lg bg-slate-100 p-1'
+          />
+        </div>
+      </div>
+
+      <p
+        className={`max-h-60[px] block overflow-auto text-black md:hidden ${todo.completed && 'text break-words line-through'}`}
+      >
+        {todo.text}
+      </p>
     </div>
   )
 }
