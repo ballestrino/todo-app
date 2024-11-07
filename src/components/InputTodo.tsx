@@ -11,11 +11,10 @@ export default function InputTodo() {
   const [error, setError] = useState('')
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    console.log('submit')
     e.preventDefault()
     if (value) {
       if (value.length > 50) {
-        setError('El texto no puede ser mayor a 50 caracteres')
+        setError('Max 50 characters')
         return
       }
       addTodo(value)

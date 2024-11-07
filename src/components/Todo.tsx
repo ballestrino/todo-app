@@ -1,4 +1,5 @@
-import { type Todo as TodoType, useTodosStore } from '@/store'
+import { useTodosStore } from '@/store'
+import { type Todo as TodoType } from '../../types'
 import TodoCompleted from './TodoCompleted'
 import { Button } from './ui/button'
 import DeleteButton from './ui/deleteButton'

@@ -1,4 +1,5 @@
-import { useTodosStore, type Todo as TodoType } from '@/store'
+import { useTodosStore } from '@/store'
+import { type Todo as TodoType } from '../../types'
 import { memo, useRef, useState } from 'react'
 import TodoEdit from './TodoEdit'
 import { useSortable } from '@dnd-kit/sortable'

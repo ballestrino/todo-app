@@ -1,4 +1,5 @@
-import { Todo, useTodosStore } from '@/store'
+import { useTodosStore } from '@/store'
+import { type Todo } from '../../types'
 import { Button } from './ui/button'
 import { Input } from './ui/input'
 import { useState } from 'react'
@@ -23,17 +24,22 @@ export default function TodoEdit({
 }: Props) {
   const { editTodo } = useTodosStore()
 
+  const [error, setError] = useState<string>('')
   const [newText, setNewText] = useState<string>(todo.text)
 
   const handleEditTodo = () => {
     if (newText) {
+      if (newText.length > 50) {
+        setError('Max 50 characters')
+        return
+      }
       editTodo(todo.id, newText)
       setEdit(false)
     }
   }
   return (
     <div
-      className='flex w-full flex-col gap-2 md:h-[80px] md:flex-row'
+      className='relative flex w-full flex-col gap-2 md:h-[80px] md:flex-row'
       onClick={(e) => {
         e.stopPropagation()
       }}
@@ -86,6 +92,9 @@ export default function TodoEdit({
         }}
         onChange={(e) => setNewText(e.target.value)}
       />
+      <p className='absolute bottom-5 left-3 text-red-400 md:-bottom-1 md:left-24'>
+        {error}
+      </p>
     </div>
   )
 }
