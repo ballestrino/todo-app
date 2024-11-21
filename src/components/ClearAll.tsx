@@ -1,5 +1,5 @@
-import { useTodosStore } from '@/store'
-import { Button } from './ui/button'
+import { useTodosStore } from '@/zustand/store'
+import { Button } from '@/components/ui/button'
 
 export default function ClearAll() {
   const { todos, setTodos } = useTodosStore()

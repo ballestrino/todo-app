@@ -1,5 +1,5 @@
 import React from 'react'
-import { useTodosStore } from '../store'
+import { useTodosStore } from '@/zustand/store'
 import { DndContext, DragEndEvent } from '@dnd-kit/core'
 import { arrayMove, SortableContext } from '@dnd-kit/sortable'
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers'

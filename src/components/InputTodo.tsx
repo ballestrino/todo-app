@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Button } from './ui/button'
 import { Input } from './ui/input'
-import { useTodosStore } from '@/store'
+import { useTodosStore } from '@/zustand/store'
 
 export default function InputTodo() {
   const [value, setValue] = useState('')

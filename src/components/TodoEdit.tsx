@@ -1,4 +1,4 @@
-import { useTodosStore } from '@/store'
+import { useTodosStore } from '@/zustand/store'
 import { type Todo } from '../../types'
 import { Button } from './ui/button'
 import { Input } from './ui/input'

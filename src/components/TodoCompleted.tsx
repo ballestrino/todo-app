@@ -1,4 +1,4 @@
-import { useTodosStore } from '@/store'
+import { useTodosStore } from '@/zustand/store'
 import { Button } from './ui/button'
 
 export default function TodoCompleted({

@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { Button } from './ui/button'
-import { useTodosStore } from '@/store'
+import { Button } from '@/components/ui/button'
+import { useTodosStore } from '@/zustand/store'
 
 export default function Filters() {
   const { getAllTodos, getCompletedTodos, getPendingTodos } = useTodosStore()
