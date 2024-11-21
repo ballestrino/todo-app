@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { v4 as uuid } from 'uuid'
-import { Todo } from '../types'
+import { Todo } from '../../types'
 
 type TodosStore = {
   todos: Todo[]
