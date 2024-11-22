@@ -10,7 +10,7 @@ export default function App() {
         <h1 className='text-center text-3xl font-semibold text-slate-600'>
           TODO APP
         </h1>
-        <p className='text-balance text-center text-slate-600'>
+        <p className='text-balance text-center font-medium text-slate-600'>
           Believe in yourself and anything is possible
         </p>
         <InputTodo />

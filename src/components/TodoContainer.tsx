@@ -21,6 +21,13 @@ const TodoContainer: React.FC = () => {
     }
   }
 
+  if (todos.length === 0)
+    return (
+      <div className='flex h-full w-full items-center justify-center text-balance pt-32 text-center font-medium'>
+        Create a new task to start planning your day
+      </div>
+    )
+
   return (
     <DndContext modifiers={[restrictToVerticalAxis]} onDragEnd={handleDragEnd}>
       <SortableContext items={todos}>
