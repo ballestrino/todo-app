@@ -17,7 +17,8 @@ type TodosStore = {
 }
 
 const getLocalTodos = () => {
-  const todos = JSON.parse(localStorage.getItem('todos') as string) || null
+  const todos =
+    JSON.parse(window.localStorage.getItem('todos') as string) || null
   return todos as Todo[]
 }
 
