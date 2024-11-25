@@ -17,7 +17,8 @@ type TodosStore = {
 }
 
 const getLocalTodos = () => {
-  const todos = JSON.parse(window.localStorage.getItem('todos') as string) || []
+  const todos =
+    JSON.parse(window.localStorage.getItem('todos') as string) || null
   return todos as Todo[]
 }
 
@@ -33,13 +34,13 @@ export const useTodosStore = create<TodosStore>((set, get) => ({
   todos: getLocalTodos() || [],
   filter: 'all',
   addTodo: (todo: string) => {
-    const todos = getLocalTodos()
+    const todos = getLocalTodos() || []
     const newTodos = [...todos, { id: uuid(), text: todo, completed: false }]
     setLocalTodos(newTodos)
     set({ todos: newTodos })
   },
   editTodo: (id: string, newText: string) => {
-    const todos = getLocalTodos()
+    const todos = getLocalTodos() || []
     const newTodos = todos.map((t) => {
       if (t.id === id) {
         return { ...t, text: newText }
@@ -51,7 +52,7 @@ export const useTodosStore = create<TodosStore>((set, get) => ({
   },
   toggleCompleted: (id: string) => {
     const todos = get().todos
-    const localTodos = getLocalTodos()
+    const localTodos = getLocalTodos() || []
     const newTodos = todos
       .map((t) => {
         if (t.id === id) {
@@ -79,7 +80,7 @@ export const useTodosStore = create<TodosStore>((set, get) => ({
   },
   removeTodo: (id: string) => {
     const todos = get().todos
-    const localTodos = getLocalTodos()
+    const localTodos = getLocalTodos() || []
     const newTodos = todos.filter((t) => t.id !== id)
     const newLocalTodos = localTodos.filter((t) => t.id !== id)
     setLocalTodos(newLocalTodos)
@@ -93,7 +94,7 @@ export const useTodosStore = create<TodosStore>((set, get) => ({
     set({ todos })
   },
   clearCompleted: () => {
-    const todos = getLocalTodos()
+    const todos = getLocalTodos() || []
     const newTodos = todos.filter((t) => !t.completed)
     setLocalTodos(newTodos)
     if (get().filter === 'completed') {
@@ -103,16 +104,16 @@ export const useTodosStore = create<TodosStore>((set, get) => ({
     set({ todos: newTodos })
   },
   getAllTodos: () => {
-    const todos = getLocalTodos()
+    const todos = getLocalTodos() || []
     set({ todos: todos, filter: 'all' })
   },
   getCompletedTodos: () => {
-    const todos = getLocalTodos()
+    const todos = getLocalTodos() || []
     const completedTodos = todos.filter((t) => t.completed)
     set({ todos: completedTodos, filter: 'completed' })
   },
   getPendingTodos: () => {
-    const todos = getLocalTodos()
+    const todos = getLocalTodos() || []
     const pendingTodos = todos.filter((t) => !t.completed)
     set({ todos: pendingTodos, filter: 'pending' })
   },
