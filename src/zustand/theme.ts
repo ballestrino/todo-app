@@ -7,7 +7,7 @@ type ThemeStore = {
 }
 
 export const useThemeStore = create<ThemeStore>((set, get) => ({
-  theme: 'light',
+  theme: (Cookies.get('theme') as 'light' | 'dark') || 'light',
   toggleTheme: () => {
     const theme = get().theme
     const body = document.querySelector('body')
