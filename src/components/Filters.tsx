@@ -7,7 +7,7 @@ export default function Filters() {
 
   const [selected, setSelected] = useState('all')
   return (
-    <div className='flex rounded-lg bg-slate-100'>
+    <div className='flex rounded-lg bg-slate-100 dark:bg-slate-800'>
       <Button
         className={`${selected === 'all' && 'underline underline-offset-4'}`}
         variant={'ghost'}

@@ -32,7 +32,7 @@ export default function InputTodo() {
         placeholder='Escribe algo'
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        className='bg-white'
+        className='bg-white text-black'
       />
       <Button type='submit'>Add Todo</Button>
       <p className='absolute -top-6 text-red-400'>{error}</p>

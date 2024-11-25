@@ -5,6 +5,7 @@ import { Button } from './ui/button'
 import DeleteButton from './ui/deleteButton'
 import { type SyntheticListenerMap } from '@dnd-kit/core/dist/hooks/utilities'
 import { type DraggableAttributes } from '@dnd-kit/core'
+import { useThemeStore } from '@/zustand/theme'
 
 interface TodoProps {
   todo: TodoType
@@ -22,6 +23,7 @@ export default function Todo({
   setEdit,
 }: TodoProps) {
   const { removeTodo } = useTodosStore()
+  const { theme } = useThemeStore()
   return (
     <div className='flex w-full flex-col gap-2 md:h-[80px] md:flex-row'>
       <div className='flex w-full'>
@@ -34,14 +36,21 @@ export default function Todo({
               {...attributes}
               {...listeners}
             >
-              <img src='/grip-vertical.svg' alt='drag item' />
+              <img
+                src={
+                  theme !== 'dark'
+                    ? '/grip-vertical_light.svg'
+                    : '/grip-vertical_dark.svg'
+                }
+                alt='drag item'
+              />
             </Button>
 
             <TodoCompleted id={todo.id} completed={todo.completed} />
           </div>
 
           <p
-            className={`hidden break-words text-black md:block ${todo.completed && 'text line-through'}`}
+            className={`hidden break-words text-black dark:text-white md:block ${todo.completed && 'text line-through'}`}
             onClick={(e) => {
               e.stopPropagation()
             }}
@@ -64,12 +73,14 @@ export default function Todo({
               setTimeout(() => inputRef.current?.focus(), 10)
             }}
           >
-            <img src='/pencil.svg' />
+            <img
+              src={theme === 'dark' ? '/pencil_light.svg' : '/pencil_dark.svg'}
+            />
           </Button>
           <DeleteButton
             onClick={() => removeTodo(todo.id)}
             position='bottom'
-            className='rounded-lg bg-slate-100 p-1'
+            className='rounded-lg bg-slate-100 p-1 dark:bg-slate-800'
           />
         </div>
       </div>
