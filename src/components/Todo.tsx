@@ -86,7 +86,7 @@ export default function Todo({
       </div>
 
       <p
-        className={`max-h-60[px] block overflow-auto text-black md:hidden ${todo.completed && 'text break-words line-through'}`}
+        className={`max-h-60[px] block overflow-auto text-black dark:text-white md:hidden ${todo.completed && 'text break-words line-through'}`}
       >
         {todo.text}
       </p>
