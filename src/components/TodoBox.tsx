@@ -30,7 +30,7 @@ function TodoBox({ todo }: { todo: TodoType }) {
     <div
       ref={setNodeRef}
       style={style}
-      className={`flex w-full items-center justify-between gap-2 rounded-lg bg-white px-5 py-2 dark:bg-slate-800 ${todo.completed && 'opacity-80'} ${!isDragging && 'shadow-sm transition-all duration-300 hover:shadow-md'}`}
+      className={`flex w-full items-center justify-between gap-2 rounded-lg bg-white px-5 py-2 dark:bg-slate-800 ${todo.completed && 'opacity-80'} ${!isDragging && 'touch-none shadow-sm transition-all duration-300 hover:shadow-md'}`}
       onClick={() => {
         toggleCompleted(todo.id)
       }}
