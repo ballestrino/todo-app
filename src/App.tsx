@@ -29,7 +29,7 @@ export default function App() {
           <img
             width={20}
             height={20}
-            src={theme === 'dark' ? '/brightness-high.svg' : '/moon-fill.svg'}
+            src={theme !== 'dark' ? '/brightness-high.svg' : '/moon-fill.svg'}
           />
         </Button>
       </div>

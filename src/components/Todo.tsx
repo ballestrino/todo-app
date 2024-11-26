@@ -39,8 +39,8 @@ export default function Todo({
               <img
                 src={
                   theme !== 'dark'
-                    ? '/grip-vertical_light.svg'
-                    : '/grip-vertical_dark.svg'
+                    ? '/grip-vertical_dark.svg'
+                    : '/grip-vertical_light.svg'
                 }
                 alt='drag item'
               />
@@ -74,7 +74,7 @@ export default function Todo({
             }}
           >
             <img
-              src={theme === 'dark' ? '/pencil_light.svg' : '/pencil_dark.svg'}
+              src={theme !== 'dark' ? '/pencil_light.svg' : '/pencil_dark.svg'}
             />
           </Button>
           <DeleteButton
